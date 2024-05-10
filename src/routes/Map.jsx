@@ -3,22 +3,46 @@ import MyMap from "../maps/MyMap";
 import { Container as MapDiv } from "react-naver-maps";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { data } from "../utils/tempData";
+import { center, localData } from "../utils/tempData";
+import { calculateCenter } from "../utils/parsing";
+import PropTypes from "prop-types";
 
-const Map = () => {
+const Map = ({ filter }) => {
   const { placeId } = useParams();
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
+  const [centerLat, setCenterLat] = useState(0);
+  const [centerLng, setCenterLng] = useState(0);
+  const [zoom, setZoom] = useState(20);
   const [loading, setLoading] = useState(true);
+  const [markers, setMarkers] = useState(localData);
 
   useEffect(() => {
+    setLoading(true);
+
+    if (!placeId) {
+      if (filter?.length === 0) {
+        setCenterLat(center.lat);
+        setCenterLng(center.lng);
+        setZoom(12);
+      } else {
+        const { centerLat: avgLat, centerLng: avgLng } = calculateCenter(
+          markers,
+          filter
+        );
+        setCenterLat(avgLat);
+        setCenterLng(avgLng);
+        if (filter.length === 1) setZoom(16);
+        else setZoom(13);
+      }
+      if (centerLat !== 0 && centerLng !== 0) setLoading(false);
+      return;
+    }
     const id = +placeId;
 
-    setLat(data[id].lat);
-    setLng(data[id].lng);
+    setCenterLat(localData[id].lat);
+    setCenterLng(localData[id].lng);
 
-    if (lat !== 0 && lng !== 0) setLoading(false);
-  }, [lat, lng, placeId]);
+    if (centerLat !== 0 && centerLng !== 0) setLoading(false);
+  }, [centerLat, centerLng, placeId, filter, markers]);
 
   return (
     <>
@@ -28,17 +52,27 @@ const Map = () => {
         <NavermapsProvider ncpClientId="b35d4kyq3s">
           <MapDiv
             style={{
-              width: "100%",
-              height: "600px",
+              width: "80%",
+              height: "800px",
             }}
           >
-            <MyMap lat={lat} lng={lng} />
+            <MyMap
+              centerLat={centerLat}
+              centerLng={centerLng}
+              zoom={zoom}
+              markers={markers}
+              filter={filter}
+            />
           </MapDiv>
-          ;
         </NavermapsProvider>
       )}
     </>
   );
+};
+
+// filter props의 PropTypes를 정의합니다.
+Map.propTypes = {
+  filter: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default Map;
