@@ -2,6 +2,28 @@ import { useEffect, useState } from "react";
 import { Marker, NaverMap, useNavermaps } from "react-naver-maps";
 import { filteringMarker } from "../utils/parsing";
 import { useParams } from "react-router-dom";
+import "../main.css";
+
+// const obj = (title) => {
+//   return `<div class="Marker" >
+//   <div class="Marker__Bar"></div>
+//   <div class="Marker__Point-Profile">
+//     <div class="Marker__Point-Center"></div>
+//   </div>
+//   <div class="Marker__Container">
+//     <div class="Marker__Title">${title}</div>
+//   </div>
+// </div>`;
+// };
+
+const obj = (title) => {
+  return `<div class="Marker" >
+  <div class="Marker__Bar"></div>
+  <div class="Marker__Point-Profile">
+    <div class="Marker__Point-Center"></div>
+  </div>
+</div>`;
+};
 
 const MyMap = ({ centerLat, centerLng, markers, zoom, filter }) => {
   const navermaps = useNavermaps();
@@ -9,7 +31,7 @@ const MyMap = ({ centerLat, centerLng, markers, zoom, filter }) => {
   const [loading, setLoading] = useState(true);
   const [myMarkers, setMyMarkers] = useState([]);
 
-  console.log(centerLat, centerLng, zoom);
+  //console.log(centerLat, centerLng, zoom);
 
   useEffect(() => {
     if (filter) {
@@ -26,6 +48,10 @@ const MyMap = ({ centerLat, centerLng, markers, zoom, filter }) => {
     }
   }, [myMarkers]);
 
+  const onClick = (event) => {
+    console.log(event.overlay.title);
+  };
+
   return (
     <>
       <NaverMap center={new navermaps.LatLng(centerLat, centerLng)} zoom={zoom}>
@@ -38,6 +64,11 @@ const MyMap = ({ centerLat, centerLng, markers, zoom, filter }) => {
             <Marker
               key={idx}
               defaultPosition={new navermaps.LatLng(marker.lat, marker.lng)}
+              icon={{
+                content: obj(marker.title),
+              }}
+              title={marker.title}
+              onClick={onClick}
             ></Marker>
           ))
         )}

@@ -31,7 +31,7 @@ const Map = ({ filter }) => {
         setCenterLat(avgLat);
         setCenterLng(avgLng);
         if (filter.length === 1) setZoom(16);
-        else setZoom(13);
+        else setZoom(12.5);
       }
       if (centerLat !== 0 && centerLng !== 0) setLoading(false);
       return;
@@ -52,8 +52,8 @@ const Map = ({ filter }) => {
         <NavermapsProvider ncpClientId="b35d4kyq3s">
           <MapDiv
             style={{
-              width: "80%",
-              height: "800px",
+              width: "100%",
+              height: "100%",
             }}
           >
             <MyMap

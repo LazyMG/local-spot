@@ -1,0 +1,103 @@
+.Marker * {
+  box-sizing: border-box;
+}
+
+.Marker {
+  position: relative;
+  z-index: 103;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+}
+
+.Marker .Marker__Bar {
+  position: absolute;
+  z-index: 104;
+  width: 2px;
+  height: 22px;
+  border-radius: 0.7px;
+  background-color: #0e3d90;
+}
+
+.Marker .Marker__Point-Profile {
+  position: absolute;
+  top: calc(-24px - 15px);
+  left: calc(-24px / 2);
+  z-index: 105;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 24px;
+  height: 24px;
+  max-height: 24px;
+  border-radius: 50px;
+  background-color: #245fc6;
+  font-size: 0.8125rem;
+  font-weight: bold;
+  line-height: 1.1875rem;
+  color: #fff;
+}
+
+.Marker .Marker__Point-Profile .Marker__Point-Center {
+  position: relative;
+  left: 0.32px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50px;
+  background-color: #fff;
+}
+
+/* .Marker .Marker__Container {
+  position: absolute;
+  z-index: 103;
+  top: calc(-40px - 4px);
+  left: calc(-12px - 9px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 54px;
+  min-height: 34px;
+  max-height: 34px;
+  white-space: nowrap;
+  padding: 3px 10px 3px 38px;
+  border: solid 1px #245fc6;
+  border-radius: 30px;
+  background-color: #fff;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+} */
+
+.Marker .Marker__Container {
+  position: absolute;
+  z-index: 103;
+  top: calc(-40px - 4px);
+  left: calc(-12px - 9px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* min-width: 24px; */
+  min-height: 34px;
+  max-height: 34px;
+  white-space: nowrap;
+  padding: 3px 10px 3px 31px;
+  border: solid 1px #245fc6;
+  border-radius: 30px;
+  background-color: #fff;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.Marker .Marker__Title {
+  min-height: 17px;
+  max-height: 17px;
+  text-shadow: 0 1px 2px #fff;
+  letter-spacing: -0.0375rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-align: start;
+  line-height: 1.0625rem;
+  color: #222;
+}

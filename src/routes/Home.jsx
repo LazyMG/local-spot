@@ -18,7 +18,8 @@ const Header = styled.div`
 
 const Content = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 0.5fr 1.5fr 1fr;
+  height: 100%;
 `;
 
 const List = styled.div`
@@ -30,6 +31,11 @@ const List = styled.div`
 
 const MapView = styled.div`
   width: 100%;
+  height: 100%;
+`;
+
+const PlaceContainer = styled.div`
+  background-color: red;
 `;
 
 const Home = () => {
@@ -66,49 +72,71 @@ const Home = () => {
             <input
               onChange={onChange}
               type="checkbox"
-              id="option1"
+              id="name1"
               name="철산동"
             />
-            <label htmlFor="option1">철산동</label>
+            <label htmlFor="name1">철산동</label>
           </div>
           <div>
             <input
               onChange={onChange}
               type="checkbox"
-              id="option2"
+              id="name2"
               name="광명동"
             />
-            <label htmlFor="option2">광명동</label>
+            <label htmlFor="name2">광명동</label>
           </div>
           <div>
             <input
               onChange={onChange}
               type="checkbox"
-              id="option3"
+              id="name3"
               name="하안동"
             />
-            <label htmlFor="option3">하안동</label>
+            <label htmlFor="name3">하안동</label>
           </div>
           <div>
             <input
               onChange={onChange}
               type="checkbox"
-              id="option4"
+              id="name4"
               name="소하동"
             />
-            <label htmlFor="option4">소하동</label>
+            <label htmlFor="name4">소하동</label>
           </div>
           <div>
             <input
               onChange={onChange}
               type="checkbox"
-              id="option5"
+              id="name5"
               name="일직동"
             />
-            <label htmlFor="option5">일직동</label>
+            <label htmlFor="name5">일직동</label>
+          </div>
+          <hr />
+          <div>
+            <input type="checkbox" id="menu1" name="한식" />
+            <label htmlFor="menu1">한식</label>
+          </div>
+          <div>
+            <input type="checkbox" id="menu2" name="일식" />
+            <label htmlFor="menu2">일식</label>
+          </div>
+          <div>
+            <input type="checkbox" id="menu3" name="중식" />
+            <label htmlFor="menu3">중식</label>
+          </div>
+          <div>
+            <input type="checkbox" id="menu4" name="양식" />
+            <label htmlFor="menu4">양식</label>
+          </div>
+          <div>
+            <input type="checkbox" id="menu5" name="주점" />
+            <label htmlFor="menu5">주점</label>
           </div>
         </List>
         <MapView>{loading ? null : <Map filter={filter} />}</MapView>
+        <PlaceContainer></PlaceContainer>
       </Content>
     </Wrapper>
   );
