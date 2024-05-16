@@ -35,7 +35,7 @@ const MapView = styled.div`
 `;
 
 const PlaceContainer = styled.div`
-  background-color: red;
+  //background-color: red;
 `;
 
 const Home = () => {
