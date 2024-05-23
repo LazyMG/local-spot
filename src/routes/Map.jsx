@@ -1,48 +1,50 @@
 import { NavermapsProvider } from "react-naver-maps";
-import MyMap from "../maps/MyMap";
 import { Container as MapDiv } from "react-naver-maps";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { center, localData } from "../utils/tempData";
-import { calculateCenter } from "../utils/parsing";
+import { useRecoilValue } from "recoil";
 import PropTypes from "prop-types";
 
-const Map = ({ filter }) => {
+import { center, newLocalData } from "../utils/tempData";
+import { calculateCenter } from "../utils/parsing";
+import { filteredPlacesState, isFilteredState } from "../atoms";
+import MyMap from "../maps/MyMap";
+
+const Map = () => {
   const { placeId } = useParams();
   const [centerLat, setCenterLat] = useState(0);
   const [centerLng, setCenterLng] = useState(0);
   const [zoom, setZoom] = useState(20);
   const [loading, setLoading] = useState(true);
-  const [markers, setMarkers] = useState(localData);
+  const filteredPlaces = useRecoilValue(filteredPlacesState);
+  const isFiltered = useRecoilValue(isFilteredState);
 
   useEffect(() => {
     setLoading(true);
 
     if (!placeId) {
-      if (filter?.length === 0) {
+      if (!isFiltered) {
         setCenterLat(center.lat);
         setCenterLng(center.lng);
-        setZoom(12);
+        setZoom(13);
       } else {
         const { centerLat: avgLat, centerLng: avgLng } = calculateCenter(
-          markers,
-          filter
+          filteredPlaces
         );
         setCenterLat(avgLat);
         setCenterLng(avgLng);
-        if (filter.length === 1) setZoom(16);
-        else setZoom(12.5);
+        setZoom(12.5);
       }
       if (centerLat !== 0 && centerLng !== 0) setLoading(false);
       return;
     }
     const id = +placeId;
 
-    setCenterLat(localData[id].lat);
-    setCenterLng(localData[id].lng);
+    setCenterLat(newLocalData[id].lat);
+    setCenterLng(newLocalData[id].lng);
 
     if (centerLat !== 0 && centerLng !== 0) setLoading(false);
-  }, [centerLat, centerLng, placeId, filter, markers]);
+  }, [centerLat, centerLng, placeId, filteredPlaces, isFiltered]);
 
   return (
     <>
@@ -56,13 +58,7 @@ const Map = ({ filter }) => {
               height: "100%",
             }}
           >
-            <MyMap
-              centerLat={centerLat}
-              centerLng={centerLng}
-              zoom={zoom}
-              markers={markers}
-              filter={filter}
-            />
+            <MyMap centerLat={centerLat} centerLng={centerLng} zoom={zoom} />
           </MapDiv>
         </NavermapsProvider>
       )}
@@ -72,7 +68,11 @@ const Map = ({ filter }) => {
 
 // filter props의 PropTypes를 정의합니다.
 Map.propTypes = {
-  filter: PropTypes.arrayOf(PropTypes.string),
+  filter: PropTypes.shape({
+    local: PropTypes.arrayOf(PropTypes.string),
+    menu: PropTypes.arrayOf(PropTypes.string),
+    time: PropTypes.arrayOf(PropTypes.string),
+  }),
 };
 
 export default Map;

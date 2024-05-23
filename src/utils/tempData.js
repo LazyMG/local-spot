@@ -26,7 +26,7 @@ export const localData = [
     address: "경기 광명시 오리로985번길 1 1층 새마을식당 숯불구이전문점",
     lat: 37.4793,
     lng: 126.85368,
-    local: "광명동",
+    local: "광명",
   },
   {
     placeId: 1,
@@ -34,7 +34,7 @@ export const localData = [
     address: "경기 광명시 광명로893번길 4",
     lat: 37.478958,
     lng: 126.85368,
-    local: "광명동",
+    local: "광명",
   },
   {
     placeId: 2,
@@ -42,7 +42,7 @@ export const localData = [
     address: "경기 광명시 광명로 891-1 2층",
     lat: 37.47867,
     lng: 126.85381,
-    local: "광명동",
+    local: "광명",
   },
   {
     placeId: 3,
@@ -50,7 +50,7 @@ export const localData = [
     address: "경기 광명시 시청로 34 지상층 시청앞 두루치기",
     lat: 37.47976,
     lng: 126.864215,
-    local: "철산동",
+    local: "철산",
   },
   {
     placeId: 4,
@@ -58,7 +58,7 @@ export const localData = [
     address: "경기 광명시 시청로 9 유홍기사무소 옆",
     lat: 37.477835,
     lng: 126.863313,
-    local: "철산동",
+    local: "철산",
   },
   {
     placeId: 5,
@@ -66,7 +66,7 @@ export const localData = [
     address: "경기 광명시 오리로876번길 6",
     lat: 37.476402,
     lng: 126.865998,
-    local: "철산동",
+    local: "철산",
   },
 
   {
@@ -75,7 +75,7 @@ export const localData = [
     address: "경기 광명시 범안로 880 풍천한방장어 광명점",
     lat: 37.4524062224145,
     lng: 126.865711226337,
-    local: "하안동",
+    local: "하안",
   },
   {
     placeId: 7,
@@ -83,7 +83,7 @@ export const localData = [
     address: "경기 광명시 밤일안로 1 2층",
     lat: 37.452454479367,
     lng: 126.86480914406,
-    local: "하안동",
+    local: "하안",
   },
 
   {
@@ -92,7 +92,7 @@ export const localData = [
     address: "경기 광명시 범안로 868 강남면옥",
     lat: 37.4514671633398,
     lng: 126.865057748854,
-    local: "하안동",
+    local: "하안",
   },
   {
     placeId: 9,
@@ -100,7 +100,7 @@ export const localData = [
     address: "경기 광명시 오리로 518 CL타워 2층",
     lat: 37.4481877869838,
     lng: 126.882022146491,
-    local: "소하동",
+    local: "소하",
   },
   {
     placeId: 10,
@@ -108,7 +108,7 @@ export const localData = [
     address: "경기 광명시 영당로 14",
     lat: 37.434963008076,
     lng: 126.878068540049,
-    local: "소하동",
+    local: "소하",
   },
 
   {
@@ -117,7 +117,7 @@ export const localData = [
     address: "경기 광명시 기아로 46 기아파크빌 101호 청춘민물장어",
     lat: 37.435968150779,
     lng: 126.884590003497,
-    local: "소하동",
+    local: "소하",
   },
   {
     placeId: 12,
@@ -125,7 +125,7 @@ export const localData = [
     address: "경기 광명시 일직로 77 A동 1층 108호, 109호",
     lat: 37.4206757866718,
     lng: 126.889836764921,
-    local: "일직동",
+    local: "일직",
   },
   {
     placeId: 13,
@@ -133,7 +133,7 @@ export const localData = [
     address: "경기 광명시 덕안로77번길 5 지웰에스테이트 206호",
     lat: 37.4214598412098,
     lng: 126.884445414597,
-    local: "일직동",
+    local: "일직",
   },
   {
     placeId: 14,
@@ -141,8 +141,263 @@ export const localData = [
     address: "경기 광명시 광명역로 26 상가동 138, 139",
     lat: 37.4141165556501,
     lng: 126.885384213605,
-    local: "일직동",
+    local: "일직",
   },
 ];
 
-export const center = { lat: 37.47862, lng: 126.864645 };
+export const newLocalData = [
+  {
+    placeId: 0,
+    title: "누이실내포차",
+    address: "광명동 290-52",
+    lat: 37.47409,
+    lng: 126.85088,
+    local: "광명",
+    type: {
+      main: "주점",
+      detail: "포장마차",
+    },
+  },
+  {
+    placeId: 1,
+    title: "마포왕갈비잡부구이",
+    address: "광명동 158-814",
+    lat: 37.47906,
+    lng: 126.853402,
+    local: "광명",
+    type: {
+      main: "한식",
+      detail: "육류,고기요리",
+    },
+  },
+  {
+    placeId: 2,
+    title: "일송정",
+    address: "광명동 158-507",
+    lat: 37.47879,
+    lng: 126.85529,
+    local: "광명",
+    type: {
+      main: "한식",
+      detail: "한식",
+    },
+  },
+  {
+    placeId: 3,
+    title: "박야비스트로",
+    address: "광명동 158-835",
+    lat: 37.47919,
+    lng: 126.852866,
+    local: "광명",
+    type: {
+      main: "주점",
+      detail: "요리주점",
+    },
+  },
+  {
+    placeId: 4,
+    title: "정인면옥평양냉면",
+    address: "광명동 91-10",
+    lat: 37.482969,
+    lng: 126.856706,
+    local: "광명",
+    type: {
+      main: "한식",
+      detail: "냉면",
+    },
+  },
+  {
+    placeId: 5,
+    title: "철산감자탕",
+    address: "철산동 403",
+    lat: 37.4755559925055,
+    lng: 126.868843883797,
+    local: "철산",
+    type: {
+      main: "한식",
+      detail: "감자탕",
+    },
+  },
+  {
+    placeId: 6,
+    title: "미유라멘",
+    address: "철산동 463-20",
+    lat: 37.4778126099809,
+    lng: 126.863236879908,
+    local: "철산",
+    type: {
+      main: "일식",
+      detail: "일본식라면",
+    },
+  },
+  {
+    placeId: 7,
+    title: "김대포",
+    address: "철산동 448",
+    lat: 37.4741648841084,
+    lng: 126.870852510781,
+    local: "철산",
+    type: {
+      main: "주점",
+      detail: "맥주,호프",
+    },
+  },
+  {
+    placeId: 8,
+    title: "철산즉석우동",
+    address: "철산동 161-2",
+    lat: 37.4817182176232,
+    lng: 126.86496537614,
+    local: "철산",
+    type: {
+      main: "일식",
+      detail: "우동,소바",
+    },
+  },
+  {
+    placeId: 9,
+    title: "신가네 칼국수제비",
+    address: "철산동 394",
+    lat: 37.4759322209947,
+    lng: 126.870119145509,
+    local: "철산",
+    type: {
+      main: "한식",
+      detail: "칼국수,만두",
+    },
+  },
+  {
+    placeId: 10,
+    title: "하안동꿀주먹",
+    address: "하안동 53",
+    lat: 37.46225,
+    lng: 126.880439,
+    local: "하안",
+    type: {
+      main: "한식",
+      detail: "돼지고기구이",
+    },
+  },
+  {
+    placeId: 11,
+    title: "온누리장작구이 광명점",
+    address: "하안동 406-1",
+    lat: 37.4501866933637,
+    lng: 126.861671535149,
+    local: "하안",
+    type: {
+      main: "한식",
+      detail: "돼지고기구이",
+    },
+  },
+  {
+    placeId: 12,
+    title: "양평골",
+    address: "하안동 411-1",
+    lat: 37.4506847646598,
+    lng: 126.86336810708,
+    local: "하안",
+    type: {
+      main: "한식",
+      detail: "해장국",
+    },
+  },
+  {
+    placeId: 13,
+    title: "풍천한방장어 광명점",
+    address: "하안동 364-4",
+    lat: 37.4523901952065,
+    lng: 126.865720748487,
+    local: "하안",
+    type: {
+      main: "한식",
+      detail: "장어,먹장어요리",
+    },
+  },
+  {
+    placeId: 14,
+    title: "매화쌈밥 광명점",
+    address: "하안동 889-2",
+    lat: 37.452647960403,
+    lng: 126.860343785569,
+    local: "하안",
+    type: {
+      main: "한식",
+      detail: "쌈밥",
+    },
+  },
+  {
+    placeId: 15,
+    title: "브로버거",
+    address: "일직동 509-1",
+    lat: 37.4222674190544,
+    lng: 126.884164905467,
+    local: "일직",
+    type: {
+      main: "양식",
+      detail: "햄버거",
+    },
+  },
+  {
+    placeId: 16,
+    title: "돼지집",
+    address: "소하동 1369-2",
+    lat: 37.4359297358757,
+    lng: 126.885856489013,
+    local: "소하",
+    type: {
+      main: "한식",
+      detail: "돼지고기구이",
+    },
+  },
+  {
+    placeId: 17,
+    title: "발해짬뽕 원조",
+    address: "소하동 1372-1",
+    lat: 37.4356376791128,
+    lng: 126.886284835711,
+    local: "소하",
+    type: {
+      main: "중식",
+      detail: "중식당",
+    },
+  },
+  {
+    placeId: 18,
+    title: "산촌신쭈꾸미",
+    address: "소하동 367-1",
+    lat: 37.4441597087518,
+    lng: 126.877152286001,
+    local: "소하",
+    type: {
+      main: "한식",
+      detail: "주꾸미요리",
+    },
+  },
+  {
+    placeId: 19,
+    title: "대박집",
+    address: "소하동 1236-4",
+    lat: 37.4366161119239,
+    lng: 126.881895002771,
+    local: "소하",
+    type: {
+      main: "한식",
+      detail: "돼지고기구이",
+    },
+  },
+  {
+    placeId: 20,
+    title: "동백연화 소하점",
+    address: "소하동 1337-2",
+    lat: 37.4476055391231,
+    lng: 126.885490227399,
+    local: "소하",
+    type: {
+      main: "주점",
+      detail: "요리주점",
+    },
+  },
+];
+
+export const center = { lat: 37.463435, lng: 126.870695 };

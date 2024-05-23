@@ -1,6 +1,4 @@
 import { Reset } from "styled-reset";
-import SearchExample from "./SearchExample";
-import TestLocation from "./TestLocation";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./routes/Home";

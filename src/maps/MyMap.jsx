@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Marker, NaverMap, useNavermaps } from "react-naver-maps";
-import { filteringMarker } from "../utils/parsing";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../main.css";
+import { newLocalData } from "../utils/tempData";
+import { useRecoilValue } from "recoil";
+import { filteredPlacesState, isFilteredState } from "../atoms";
+import PropTypes from "prop-types";
 
 // const obj = (title) => {
 //   return `<div class="Marker" >
@@ -25,22 +28,24 @@ const obj = (title) => {
 </div>`;
 };
 
-const MyMap = ({ centerLat, centerLng, markers, zoom, filter }) => {
+const MyMap = ({ centerLat, centerLng, zoom }) => {
   const navermaps = useNavermaps();
   const { placeId } = useParams();
   const [loading, setLoading] = useState(true);
   const [myMarkers, setMyMarkers] = useState([]);
-
-  //console.log(centerLat, centerLng, zoom);
+  const navigate = useNavigate();
+  const filteredPlaces = useRecoilValue(filteredPlacesState);
+  const isFiltered = useRecoilValue(isFilteredState);
 
   useEffect(() => {
-    if (filter) {
+    if (isFiltered) {
       setLoading(true);
-      setMyMarkers(filteringMarker(markers, filter));
+      setMyMarkers(filteredPlaces);
     } else {
+      setMyMarkers(filteredPlaces);
       setLoading(false);
     }
-  }, [filter, markers]);
+  }, [filteredPlaces, isFiltered]);
 
   useEffect(() => {
     if (myMarkers.length > 0) {
@@ -49,7 +54,11 @@ const MyMap = ({ centerLat, centerLng, markers, zoom, filter }) => {
   }, [myMarkers]);
 
   const onClick = (event) => {
-    console.log(event.overlay.title);
+    const [selectedPlace] = newLocalData.filter(
+      (data) => data.title === event.overlay.title
+    );
+    const placeId = selectedPlace.placeId;
+    navigate(`map/${placeId}`);
   };
 
   return (
@@ -75,6 +84,12 @@ const MyMap = ({ centerLat, centerLng, markers, zoom, filter }) => {
       </NaverMap>
     </>
   );
+};
+
+MyMap.propTypes = {
+  centerLat: PropTypes.number,
+  centerLng: PropTypes.number,
+  zoom: PropTypes.number,
 };
 
 export default MyMap;
