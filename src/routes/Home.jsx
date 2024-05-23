@@ -1,7 +1,10 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Map from "./Map";
 import { useState } from "react";
+import PlaceList from "../components/PlaceList";
+import { useRecoilState } from "recoil";
+import { filterState } from "../atoms";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -35,24 +38,39 @@ const MapView = styled.div`
 `;
 
 const PlaceContainer = styled.div`
-  //background-color: red;
+  height: 800px;
+  /* border: 1px solid black; */
 `;
 
 const Home = () => {
-  const [filter, setFilter] = useState([]);
+  const [filter, setFilter] = useRecoilState(filterState);
   const [loading, setLoading] = useState(false);
 
-  const onChange = (event) => {
+  const onChange = (event, type) => {
     const { name, checked } = event.target;
     setLoading(true);
     if (checked) {
-      setFilter((prev) => [...prev, name]);
+      if (name.includes("|")) {
+        const nameArr = name.split("|");
+        setFilter((prev) => ({ ...prev, [type]: [...prev[type], ...nameArr] }));
+      } else {
+        setFilter((prev) => ({ ...prev, [type]: [...prev[type], name] }));
+      }
     } else {
-      setFilter(
-        (prev) => prev.filter((el) => el !== name)
-        // const tempArr = prev;
-        // return tempArr.filter((el) => el !== event.target.name);
-      );
+      if (name.includes("|")) {
+        const nameArr = name.split("|");
+        setFilter((prev) => ({
+          ...prev,
+          [type]: prev[type].filter(
+            (el) => el !== nameArr[0] && el !== nameArr[1]
+          ),
+        }));
+      } else {
+        setFilter((prev) => ({
+          ...prev,
+          [type]: prev[type].filter((el) => el !== name),
+        }));
+      }
     }
     setLoading(false);
   };
@@ -70,73 +88,99 @@ const Home = () => {
 
           <div>
             <input
-              onChange={onChange}
+              onChange={(event) => onChange(event, "local")}
               type="checkbox"
               id="name1"
-              name="철산동"
+              name="철산"
             />
-            <label htmlFor="name1">철산동</label>
+            <label htmlFor="name1">철산</label>
           </div>
           <div>
             <input
-              onChange={onChange}
+              onChange={(event) => onChange(event, "local")}
               type="checkbox"
               id="name2"
-              name="광명동"
+              name="광명"
             />
-            <label htmlFor="name2">광명동</label>
+            <label htmlFor="name2">광명</label>
           </div>
           <div>
             <input
-              onChange={onChange}
-              type="checkbox"
-              id="name3"
-              name="하안동"
-            />
-            <label htmlFor="name3">하안동</label>
-          </div>
-          <div>
-            <input
-              onChange={onChange}
+              onChange={(event) => onChange(event, "local")}
               type="checkbox"
               id="name4"
-              name="소하동"
+              name="소하"
             />
-            <label htmlFor="name4">소하동</label>
+            <label htmlFor="name3">소하</label>
+          </div>
+          {/* <div>
+            <input onChange={onChange} type="checkbox" id="name3" name="하안" />
+            <label htmlFor="name4">하안</label>
           </div>
           <div>
+            <input onChange={onChange} type="checkbox" id="name5" name="일직" />
+            <label htmlFor="name5">일직</label>
+          </div> */}
+          <div>
             <input
-              onChange={onChange}
+              onChange={(event) => onChange(event, "local")}
               type="checkbox"
-              id="name5"
-              name="일직동"
+              id="name4"
+              name="하안|일직"
             />
-            <label htmlFor="name5">일직동</label>
+            <label htmlFor="name4">하안 | 일직</label>
           </div>
           <hr />
           <div>
-            <input type="checkbox" id="menu1" name="한식" />
+            <input
+              onChange={(event) => onChange(event, "menu")}
+              type="checkbox"
+              id="menu1"
+              name="한식"
+            />
             <label htmlFor="menu1">한식</label>
           </div>
           <div>
-            <input type="checkbox" id="menu2" name="일식" />
+            <input
+              onChange={(event) => onChange(event, "menu")}
+              type="checkbox"
+              id="menu2"
+              name="일식"
+            />
             <label htmlFor="menu2">일식</label>
           </div>
           <div>
-            <input type="checkbox" id="menu3" name="중식" />
+            <input
+              onChange={(event) => onChange(event, "menu")}
+              type="checkbox"
+              id="menu3"
+              name="중식"
+            />
             <label htmlFor="menu3">중식</label>
           </div>
           <div>
-            <input type="checkbox" id="menu4" name="양식" />
+            <input
+              onChange={(event) => onChange(event, "menu")}
+              type="checkbox"
+              id="menu4"
+              name="양식"
+            />
             <label htmlFor="menu4">양식</label>
           </div>
           <div>
-            <input type="checkbox" id="menu5" name="주점" />
+            <input
+              onChange={(event) => onChange(event, "menu")}
+              type="checkbox"
+              id="menu5"
+              name="주점"
+            />
             <label htmlFor="menu5">주점</label>
           </div>
         </List>
         <MapView>{loading ? null : <Map filter={filter} />}</MapView>
-        <PlaceContainer></PlaceContainer>
+        <PlaceContainer>
+          <PlaceList />
+        </PlaceContainer>
       </Content>
     </Wrapper>
   );
