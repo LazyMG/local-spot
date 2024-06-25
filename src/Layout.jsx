@@ -12,14 +12,14 @@ const Wrapper = styled.div`
 const NavLink = styled.div`
   display: flex;
   gap: 10px;
-  height: 5%;
+  //height: 5%;
 `;
 
 const Content = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 95%;
+  //height: 95%;
 `;
 
 const Layout = () => {

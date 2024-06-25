@@ -1,50 +1,46 @@
 import { NavermapsProvider } from "react-naver-maps";
 import { Container as MapDiv } from "react-naver-maps";
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import PropTypes from "prop-types";
 
-import { center, newLocalData } from "../utils/tempData";
+import { center } from "../utils/tempData";
 import { calculateCenter } from "../utils/parsing";
-import { filteredPlacesState, isFilteredState } from "../atoms";
+import { filteredPlacesState, isFilteredState, placeState } from "../atoms";
 import MyMap from "../maps/MyMap";
 
-const Map = () => {
-  const { placeId } = useParams();
+const Map = ({ defaultZoom = 17 }) => {
   const [centerLat, setCenterLat] = useState(0);
   const [centerLng, setCenterLng] = useState(0);
-  const [zoom, setZoom] = useState(20);
+  const [zoom, setZoom] = useState(defaultZoom);
   const [loading, setLoading] = useState(true);
   const filteredPlaces = useRecoilValue(filteredPlacesState);
   const isFiltered = useRecoilValue(isFilteredState);
+  const places = useRecoilValue(placeState);
+
+  const [isDetail, setIsDetail] = useState(true);
 
   useEffect(() => {
     setLoading(true);
 
-    if (!placeId) {
-      if (!isFiltered) {
-        setCenterLat(center.lat);
-        setCenterLng(center.lng);
-        setZoom(13);
-      } else {
-        const { centerLat: avgLat, centerLng: avgLng } = calculateCenter(
-          filteredPlaces
-        );
-        setCenterLat(avgLat);
-        setCenterLng(avgLng);
-        setZoom(12.5);
-      }
-      if (centerLat !== 0 && centerLng !== 0) setLoading(false);
-      return;
+    if (!isFiltered) {
+      setCenterLat(center.lat);
+      setCenterLng(center.lng);
+      setZoom(13);
+    } else {
+      const { centerLat: avgLat, centerLng: avgLng } = calculateCenter(
+        filteredPlaces
+      );
+      console.log("filter lat", avgLat);
+      console.log("filter lmg", avgLng);
+
+      setCenterLat(avgLat);
+      setCenterLng(avgLng);
+      setZoom(12.5);
     }
-    const id = +placeId;
-
-    setCenterLat(newLocalData[id].lat);
-    setCenterLng(newLocalData[id].lng);
-
     if (centerLat !== 0 && centerLng !== 0) setLoading(false);
-  }, [centerLat, centerLng, placeId, filteredPlaces, isFiltered]);
+    setIsDetail(false);
+  }, [centerLat, centerLng, filteredPlaces, isFiltered, places]);
 
   return (
     <>
@@ -58,7 +54,12 @@ const Map = () => {
               height: "100%",
             }}
           >
-            <MyMap centerLat={centerLat} centerLng={centerLng} zoom={zoom} />
+            <MyMap
+              centerLat={centerLat}
+              centerLng={centerLng}
+              zoom={zoom}
+              isDetail={isDetail}
+            />
           </MapDiv>
         </NavermapsProvider>
       )}
@@ -73,6 +74,7 @@ Map.propTypes = {
     menu: PropTypes.arrayOf(PropTypes.string),
     time: PropTypes.arrayOf(PropTypes.string),
   }),
+  defaultZoom: PropTypes.number,
 };
 
 export default Map;

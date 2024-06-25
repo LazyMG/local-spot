@@ -22,23 +22,18 @@ const PlaceItem = ({ place }) => {
     navigate(`map/${placeId}`);
   };
 
-  return (
-    <Wrapper onClick={() => onClick(place.placeId)}>{place.title}</Wrapper>
-  );
+  return <Wrapper onClick={() => onClick(place.id)}>{place.name}</Wrapper>;
 };
 
 PlaceItem.propTypes = {
   place: PropTypes.shape({
-    placeId: PropTypes.number,
-    title: PropTypes.string,
+    id: PropTypes.string,
+    name: PropTypes.string,
     address: PropTypes.string,
     local: PropTypes.string,
     lat: PropTypes.number,
     lng: PropTypes.number,
-    type: PropTypes.shape({
-      main: PropTypes.string,
-      detail: PropTypes.string,
-    }),
+    type: PropTypes.string,
   }),
 };
 

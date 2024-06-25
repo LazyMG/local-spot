@@ -1,10 +1,11 @@
 // import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Map from "./Map";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import PlaceList from "../components/PlaceList";
-import { useRecoilState } from "recoil";
-import { filterState } from "../atoms";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { filterState, isFilteredState, placeState } from "../atoms";
+import { changeDayToKor } from "../utils/parsing";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -45,26 +46,51 @@ const PlaceContainer = styled.div`
 const Home = () => {
   const [filter, setFilter] = useRecoilState(filterState);
   const [loading, setLoading] = useState(false);
+  const [time, setTime] = useState(new Date());
+  const setPlace = useSetRecoilState(placeState);
+
+  const getJson = useCallback(async () => {
+    fetch("/restraunt_list.json")
+      .then((response) => response.json())
+      .then((data) => {
+        //console.log(data);
+        setPlace(data);
+      })
+      .catch((error) => console.error("Error loading local data:", error));
+  }, [setPlace]);
+
+  useEffect(() => {
+    getJson();
+  }, [getJson]);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(id);
+  }, [time]);
+
+  useEffect(() => {
+    setFilter({ local: [], menu: [], time: [] });
+  }, [setFilter]);
 
   const onChange = (event, type) => {
     const { name, checked } = event.target;
     setLoading(true);
     if (checked) {
-      if (name.includes("|")) {
-        const nameArr = name.split("|");
-        setFilter((prev) => ({ ...prev, [type]: [...prev[type], ...nameArr] }));
+      if (type === "time") {
+        const day = time.toString().split(" ")[0];
+        const now = time.toString().split(" ")[4].substring(0, 5);
+        const korDay = changeDayToKor(day);
+        console.log(now);
+        setFilter((prev) => ({ ...prev, [type]: [korDay, now] }));
       } else {
         setFilter((prev) => ({ ...prev, [type]: [...prev[type], name] }));
       }
     } else {
-      if (name.includes("|")) {
-        const nameArr = name.split("|");
-        setFilter((prev) => ({
-          ...prev,
-          [type]: prev[type].filter(
-            (el) => el !== nameArr[0] && el !== nameArr[1]
-          ),
-        }));
+      if (type === "time") {
+        setFilter((prev) => ({ ...prev, [type]: [] }));
       } else {
         setFilter((prev) => ({
           ...prev,
@@ -80,12 +106,6 @@ const Home = () => {
       <Header>맛집 목록</Header>
       <Content>
         <List>
-          {/* {localData.map((item, idx) => (
-            <li key={idx}>
-              <Link to={`/map/${item.placeId}`}>{item.title}</Link>
-            </li>
-          ))} */}
-
           <div>
             <input
               onChange={(event) => onChange(event, "local")}
@@ -109,26 +129,18 @@ const Home = () => {
               onChange={(event) => onChange(event, "local")}
               type="checkbox"
               id="name4"
-              name="소하"
+              name="하안"
             />
-            <label htmlFor="name3">소하</label>
+            <label htmlFor="name3">하안</label>
           </div>
-          {/* <div>
-            <input onChange={onChange} type="checkbox" id="name3" name="하안" />
-            <label htmlFor="name4">하안</label>
-          </div>
-          <div>
-            <input onChange={onChange} type="checkbox" id="name5" name="일직" />
-            <label htmlFor="name5">일직</label>
-          </div> */}
           <div>
             <input
               onChange={(event) => onChange(event, "local")}
               type="checkbox"
               id="name4"
-              name="하안|일직"
+              name="소하"
             />
-            <label htmlFor="name4">하안 | 일직</label>
+            <label htmlFor="name4">소하</label>
           </div>
           <hr />
           <div>
@@ -175,6 +187,44 @@ const Home = () => {
               name="주점"
             />
             <label htmlFor="menu5">주점</label>
+          </div>
+          <hr />
+          <div>
+            <input
+              onChange={(event) => onChange(event, "time")}
+              type="checkbox"
+              id="time"
+              name="영업중"
+            />
+            <label htmlFor="time">영업중</label>
+            <br />
+            {/* <label htmlFor="time">영업시간</label>
+            <input
+              name="영업시간"
+              id="time"
+              type="range"
+              onChange={(event) => onChange(event, "time")}
+            />
+            <br />
+            <span>{new Date().toLocaleTimeString()}</span>
+            <br />
+            <input
+              type="range"
+              id="temp"
+              name="temp"
+              list="markers"
+              step="25"
+              min="0"
+              max="100"
+            /> */}
+
+            {/* <datalist id="markers">
+              <option value="0"></option>
+              <option value="25"></option>
+              <option value="50"></option>
+              <option value="75"></option>
+              <option value="100"></option>
+            </datalist> */}
           </div>
         </List>
         <MapView>{loading ? null : <Map filter={filter} />}</MapView>

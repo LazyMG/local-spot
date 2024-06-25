@@ -5,6 +5,7 @@ import Home from "./routes/Home";
 import Map from "./routes/Map";
 import Login from "./routes/Login";
 import CreateAccount from "./routes/Create-Account";
+import Place from "./routes/Place";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/map/:placeId",
-        element: <Map />,
+        element: <Place />,
       },
     ],
   },

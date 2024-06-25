@@ -27,7 +27,7 @@ const PlaceList = () => {
     <Wrapper>
       <ListContainer>
         {places.map((place) => (
-          <PlaceItem key={place.placeId} place={place} />
+          <PlaceItem key={place.id} place={place} />
         ))}
       </ListContainer>
     </Wrapper>
