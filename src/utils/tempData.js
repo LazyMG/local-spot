@@ -157,6 +157,7 @@ export const newLocalData = [
       main: "주점",
       detail: "포장마차",
     },
+    time: {},
   },
   {
     placeId: 1,
@@ -168,6 +169,15 @@ export const newLocalData = [
     type: {
       main: "한식",
       detail: "육류,고기요리",
+    },
+    time: {
+      Mon: { full: ["15:00", "24:00"], break: [], lastOrder: [] },
+      Tue: { full: ["15:00", "24:00"], break: [], lastOrder: [] },
+      Wed: { full: ["15:00", "24:00"], break: [], lastOrder: [] },
+      Thu: { full: ["15:00", "24:00"], break: [], lastOrder: [] },
+      Fri: { full: ["15:00", "24:00"], break: [], lastOrder: [] },
+      Sat: { full: ["15:00", "24:00"], break: [], lastOrder: [] },
+      Sun: { full: ["14:00", "22:00"], break: [], lastOrder: [] },
     },
   },
   {
@@ -181,6 +191,43 @@ export const newLocalData = [
       main: "한식",
       detail: "한식",
     },
+    time: {
+      Mon: {
+        full: ["11:30", "21:30"],
+        break: ["15:00", "16:00"],
+        lastOrder: [],
+      },
+      Tue: {
+        full: ["11:30", "21:30"],
+        break: ["15:00", "16:00"],
+        lastOrder: [],
+      },
+      Wed: {
+        full: ["11:30", "21:30"],
+        break: ["15:00", "16:00"],
+        lastOrder: [],
+      },
+      Thu: {
+        full: ["11:30", "21:30"],
+        break: ["15:00", "16:00"],
+        lastOrder: [],
+      },
+      Fri: {
+        full: ["11:30", "21:30"],
+        break: ["15:00", "16:00"],
+        lastOrder: [],
+      },
+      Sat: {
+        full: ["11:30", "21:30"],
+        break: ["15:00", "16:00"],
+        lastOrder: [],
+      },
+      Sun: {
+        full: ["11:30", "21:30"],
+        break: ["15:00", "16:00"],
+        lastOrder: [],
+      },
+    },
   },
   {
     placeId: 3,
@@ -192,6 +239,15 @@ export const newLocalData = [
     type: {
       main: "주점",
       detail: "요리주점",
+    },
+    time: {
+      Mon: { full: ["18:00", "02:00"], break: [], lastOrder: ["01:00"] },
+      Tue: { full: [], break: [], lastOrder: [] },
+      Wed: { full: ["18:00", "02:00"], break: [], lastOrder: ["01:00"] },
+      Thu: { full: ["18:00", "02:00"], break: [], lastOrder: ["01:00"] },
+      Fri: { full: ["18:00", "02:00"], break: [], lastOrder: ["01:00"] },
+      Sat: { full: ["18:00", "02:00"], break: [], lastOrder: ["01:00"] },
+      Sun: { full: ["18:00", "02:00"], break: [], lastOrder: ["01:00"] },
     },
   },
   {
@@ -210,32 +266,21 @@ export const newLocalData = [
     placeId: 5,
     title: "철산감자탕",
     address: "철산동 403",
-    lat: 37.4755559925055,
-    lng: 126.868843883797,
+    lat: 37.475555,
+    lng: 126.868843,
     local: "철산",
     type: {
       main: "한식",
       detail: "감자탕",
     },
   },
+
   {
     placeId: 6,
-    title: "미유라멘",
-    address: "철산동 463-20",
-    lat: 37.4778126099809,
-    lng: 126.863236879908,
-    local: "철산",
-    type: {
-      main: "일식",
-      detail: "일본식라면",
-    },
-  },
-  {
-    placeId: 7,
     title: "김대포",
     address: "철산동 448",
-    lat: 37.4741648841084,
-    lng: 126.870852510781,
+    lat: 37.474117,
+    lng: 126.8708659,
     local: "철산",
     type: {
       main: "주점",
@@ -243,11 +288,11 @@ export const newLocalData = [
     },
   },
   {
-    placeId: 8,
+    placeId: 7,
     title: "철산즉석우동",
     address: "철산동 161-2",
-    lat: 37.4817182176232,
-    lng: 126.86496537614,
+    lat: 37.48173,
+    lng: 126.86499,
     local: "철산",
     type: {
       main: "일식",
@@ -255,11 +300,11 @@ export const newLocalData = [
     },
   },
   {
-    placeId: 9,
+    placeId: 8,
     title: "신가네 칼국수제비",
     address: "철산동 394",
-    lat: 37.4759322209947,
-    lng: 126.870119145509,
+    lat: 37.47586,
+    lng: 126.8702,
     local: "철산",
     type: {
       main: "한식",
@@ -267,7 +312,7 @@ export const newLocalData = [
     },
   },
   {
-    placeId: 10,
+    placeId: 9,
     title: "하안동꿀주먹",
     address: "하안동 53",
     lat: 37.46225,
@@ -279,11 +324,11 @@ export const newLocalData = [
     },
   },
   {
-    placeId: 11,
+    placeId: 10,
     title: "온누리장작구이 광명점",
     address: "하안동 406-1",
-    lat: 37.4501866933637,
-    lng: 126.861671535149,
+    lat: 37.450245,
+    lng: 126.861705,
     local: "하안",
     type: {
       main: "한식",
@@ -291,11 +336,11 @@ export const newLocalData = [
     },
   },
   {
-    placeId: 12,
+    placeId: 11,
     title: "양평골",
     address: "하안동 411-1",
-    lat: 37.4506847646598,
-    lng: 126.86336810708,
+    lat: 37.45081,
+    lng: 126.8634,
     local: "하안",
     type: {
       main: "한식",
@@ -303,11 +348,11 @@ export const newLocalData = [
     },
   },
   {
-    placeId: 13,
+    placeId: 12,
     title: "풍천한방장어 광명점",
     address: "하안동 364-4",
-    lat: 37.4523901952065,
-    lng: 126.865720748487,
+    lat: 37.452365,
+    lng: 126.86572,
     local: "하안",
     type: {
       main: "한식",
@@ -315,11 +360,11 @@ export const newLocalData = [
     },
   },
   {
-    placeId: 14,
+    placeId: 13,
     title: "매화쌈밥 광명점",
     address: "하안동 889-2",
-    lat: 37.452647960403,
-    lng: 126.860343785569,
+    lat: 37.45273,
+    lng: 126.860355,
     local: "하안",
     type: {
       main: "한식",
@@ -327,23 +372,11 @@ export const newLocalData = [
     },
   },
   {
-    placeId: 15,
-    title: "브로버거",
-    address: "일직동 509-1",
-    lat: 37.4222674190544,
-    lng: 126.884164905467,
-    local: "일직",
-    type: {
-      main: "양식",
-      detail: "햄버거",
-    },
-  },
-  {
-    placeId: 16,
+    placeId: 14,
     title: "돼지집",
     address: "소하동 1369-2",
-    lat: 37.4359297358757,
-    lng: 126.885856489013,
+    lat: 37.43595,
+    lng: 126.88578,
     local: "소하",
     type: {
       main: "한식",
@@ -351,11 +384,11 @@ export const newLocalData = [
     },
   },
   {
-    placeId: 17,
+    placeId: 15,
     title: "발해짬뽕 원조",
     address: "소하동 1372-1",
-    lat: 37.4356376791128,
-    lng: 126.886284835711,
+    lat: 37.435677,
+    lng: 126.88634,
     local: "소하",
     type: {
       main: "중식",
@@ -363,11 +396,11 @@ export const newLocalData = [
     },
   },
   {
-    placeId: 18,
+    placeId: 16,
     title: "산촌신쭈꾸미",
     address: "소하동 367-1",
-    lat: 37.4441597087518,
-    lng: 126.877152286001,
+    lat: 37.444168,
+    lng: 126.877132,
     local: "소하",
     type: {
       main: "한식",
@@ -375,11 +408,11 @@ export const newLocalData = [
     },
   },
   {
-    placeId: 19,
+    placeId: 17,
     title: "대박집",
     address: "소하동 1236-4",
-    lat: 37.4366161119239,
-    lng: 126.881895002771,
+    lat: 37.436505,
+    lng: 126.88192,
     local: "소하",
     type: {
       main: "한식",
@@ -387,12 +420,36 @@ export const newLocalData = [
     },
   },
   {
-    placeId: 20,
+    placeId: 18,
     title: "동백연화 소하점",
     address: "소하동 1337-2",
-    lat: 37.4476055391231,
-    lng: 126.885490227399,
+    lat: 37.44755,
+    lng: 126.88549,
     local: "소하",
+    type: {
+      main: "주점",
+      detail: "요리주점",
+    },
+  },
+  {
+    placeId: 19,
+    title: "덕이네 돼지뽈살",
+    address: "광명동 333-3",
+    lat: 37.472455,
+    lng: 126.85402,
+    local: "광명",
+    type: {
+      main: "주점",
+      detail: "요리주점",
+    },
+  },
+  {
+    placeId: 20,
+    title: "해주냉면",
+    address: "광명동 158-57",
+    lat: 37.480245,
+    lng: 126.85585,
+    local: "광명",
     type: {
       main: "주점",
       detail: "요리주점",

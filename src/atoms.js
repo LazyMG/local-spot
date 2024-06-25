@@ -1,9 +1,14 @@
 import { atom, selector } from "recoil";
-import { newLocalData } from "./utils/tempData";
+import { getOpenBusinesses } from "./utils/parsing";
+
+// export const placeState = atom({
+//   key: "placeState",
+//   default: newLocalData,
+// });
 
 export const placeState = atom({
   key: "placeState",
-  default: newLocalData,
+  default: [],
 });
 
 export const filterState = atom({
@@ -20,7 +25,7 @@ export const isFilteredState = selector({
   get: ({ get }) => {
     const { local, menu, time } = get(filterState);
 
-    if (local.length === 0 && menu.length === 0 && time.length === 0)
+    if (local?.length === 0 && menu?.length === 0 && time?.length === 0)
       return false;
     else return true;
   },
@@ -44,15 +49,27 @@ export const filteredPlacesState = selector({
       commonList =
         menu.length === 0
           ? localList
-          : localList.filter((place) => menu?.includes(place.type?.main));
+          : localList.filter((place) => menu?.includes(place.type));
+      commonList =
+        time.length === 0 ? commonList : getOpenBusinesses(commonList);
     } else if (menu.length !== 0) {
-      const menuList = places.filter((place) =>
-        menu?.includes(place.type?.main)
-      );
+      const menuList = places.filter((place) => menu?.includes(place.type));
       commonList =
         local.length === 0
           ? menuList
           : menuList.filter((place) => local?.includes(place.local));
+      commonList =
+        time.length === 0 ? commonList : getOpenBusinesses(commonList);
+    } else if (time.length !== 0) {
+      const timeList = getOpenBusinesses(places);
+      commonList =
+        local.length === 0
+          ? timeList
+          : timeList.filter((place) => menu?.includes(place.local));
+      commonList =
+        menu.length === 0
+          ? timeList
+          : timeList.filter((place) => menu?.includes(place.type));
     }
     return commonList;
   },
